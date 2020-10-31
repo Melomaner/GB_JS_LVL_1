@@ -2,77 +2,39 @@
 
 <script>
     "use strict";
+    const arr = [
+        [2, 4, 6],
+        [1, 5, 10],
+        [7, 4, 1],
+    ];
+    let max = 0;
+    let ind_max;
+    let min = 1000;
+    let ind_min;
+    let local_max = 0;
 
-    let x = parseInt(prompt("Введите число x"));
-    let y = parseInt(prompt("Введите число y"));
-
-    if (!isNaN(x) && !isNaN(y)){
-        let operation = prompt("Что вы хотите сделать с числами?" +
-        " : sum = Сложить | diff = Вычесть | div = разделить | multi = Умножить");
-        alert ("Результат операции: " + mathOperation(x, y, operation));
-    } else {
-        alert("Введенные данные не являются числом");
+    // Задание 1
+    for (let i = 0; i < arr.length; ++i){
+        for (let j = 0; j < arr[i].length; ++j){
+            local_max += arr[i][j];
+        }
+        if (local_max > max){
+            max = local_max;
+            ind_max = i;
+        }
+        local_max = 0;
     }
 
+    // Задание 2
 
-
-
-    /**
-     * Проводит выбранную пользователем операцию
-     * @param {number} arg1
-     * @param {number} arg2
-     * @param {string} operation
-     * @returns {*}
-     */
-    function mathOperation(arg1, arg2, operation){
-        switch (operation) {
-            case "sum":
-                return sum(arg1, arg2);
-            case "diff":
-                return diff(arg1, arg2);
-            case "div":
-                return div(arg1,arg2);
-            case "multi":
-                return multi(arg1, arg2);
-            default:
-                return "Введена не верная команда"
+    for (let i = 0; i < arr[ind_max].length; ++i){
+        if (arr[ind_max][i] < min){
+            min = arr[ind_max][i];
+            ind_min = i;
         }
     }
-    /**
-     * Расчитывает сумму чисел
-     * @param {number} a
-     * @param {number} b
-     * @returns {number}
-     */
-    function sum(a, b) {
-        return a + b;
-    }
-    /**
-     * Расчитывает разность чисел
-     * @param {number} a
-     * @param {number} b
-     * @returns {number}
-     */
-    function diff(a, b) {
-        return a - b;
-    }
-    /**
-     * Расчитывает часное чисел
-     * @param {number} a
-     * @param {number} b
-     * @returns {number}
-     */
-    function div(a, b) {
-        return a / b;
-    }
-    /**
-     * Расчитывает произведение чисел
-     * @param {number} a
-     * @param {number} b
-     * @returns {number}
-     */
-    function multi(a, b) {
-        return a * b;
-    }
+
+    console.log(`Минимальная сумма: ${max} и она лежит в индексе ${ind_max}`);
+    console.log(`Минимальное значекние в найденом массиве: ${ind_min}`);
 
 </script>
