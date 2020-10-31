@@ -2,21 +2,24 @@
 
 <script>
  "use strict";
- let arr = [];
- let num = 0;
- // Составляем массив из 11 чисел
- for (let i = 0; i <= 10 ; ++i){
-     arr.push(i);
+
+ let obj_with_num = {};
+/*
+Функциядля создание обьекта из числа
+ */
+ function num_in_obj(num) {
+     obj_with_num.first_digit = num % 10;
+     obj_with_num.second_digit = (num - (num % 10)) / 10 % 10;
+     obj_with_num.third_digit = (num - (num % 100)) / 100 % 10;
+
  }
- // console.log(arr);
-do {
-    if (arr[num] === 0) {
-        console.log(arr[num] + ' - это ноль');
-    } else  if (arr[num] % 2 === 1){
-        console.log(arr[num] + ' - нечетное число');
-    } else {
-        console.log(arr[num] + ' - четное число');
-    }
-    ++num;
-} while (num <= 10);
+ let num = prompt("Введите целое число от 0 до 999");
+ if (!isNaN(parseInt(num)) && num % 1 === 0 && num >= 0 && num < 1000 ){
+     num_in_obj(num);
+     console.log(obj_with_num);
+ } else {
+     console.log("Вы ввели неверное число");
+     console.log(obj_with_num);
+ }
+
 </script>

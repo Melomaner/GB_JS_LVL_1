@@ -2,10 +2,98 @@
 
 <script>
     "use strict";
-    let str = [];
-    for (let i = 1;i <= 20; ++i) {
-        // console.log(i);
-        console.log(str.join('X'));
-        str.push('X');
-    }
+    const questions = {
+        max_question: 5,
+        question_1: "Самый зубастый столовый прибор?", //вилка
+        answer_1: [2,"Половник", "Вилка", "Ложка", "Ножик",],
+        question_2: "Как называется хищная оса, охотящаяся на пчел?", //Пчелиный волк
+        answer_2: [1,"Пчелиный волк", "Осиный волк","Пчелиный медведь", "Осиный медведь"],
+        question_3: "Сколько зубов у зайца?", //28
+        answer_3: [4,"32", "64","22", "28"],
+        question_4:"У каких хладнокровных животных при высиживании яиц температура тела повышается на 3-4 градуса?",//питон
+        answer_4: [2,"Голый землекоп", "Питон","Обыкновенная жаба", "Логгерхед"],
+        question_5: "Какая настольная игра была создана в 1998 году Уит Александером и Ричардом Тейтом, " +
+            "это настольная настольная игра, основанная на Людо", //Череп
+        answer_5: [3,"Мафия", "Свинтус","Череп", "Имадженариум"],
+    };
+
+    const player = {
+        score: null,
+        try: null,
+        question_now: null,
+        check(answer_player,answer_true){
+            if (answer_player === answer_true){
+                this.score++;
+                console.log(`ответ верный, ваш счет: ${this.score} \n Оставшиеся попытки: ${this.try}` );
+            } else {
+                this.try--;
+                console.log(`ответ неверный, ваш счет: ${this.score} \n Оставшиеся попытки: ${this.try}` );
+                if (this.try <= 0) {
+                return false;
+                }
+                // return true; чтобы не пропускать вопрос после ошибки.
+            }
+            this.question_now++
+            return true;
+
+        },
+        init() {
+            this.question_now = 1;
+            this.try = 3;
+            this.score = 0;
+        },
+    };
+
+    const game = {
+        questions,
+        player,
+        avaliableDirections: ["","a", "b", "c", "d"],
+
+        run() {
+            alert("Добро пожаловать в игру кто хочет стать милиниалом. Игра будет проходить в консоле.");
+            let next_try = true
+            this.player.init();
+            while (next_try) {
+                if (this.send_quest() === false){
+                    return alert(` Вопросы закончились, ваш счет: ${this.player.score} спасибо за игру !` );
+                }
+                const direction = this.get_direction();
+
+                if(direction === null) {
+                    return alert("Досвидания");
+                }
+                console.clear();
+                next_try = this.player.check(this.avaliableDirections.indexOf(direction),
+                    this.questions[`answer_${this.player.question_now}`][0]);
+            }
+            if (confirm("у вас закончились попытки. Сыграть снова ?") === true){
+                this.run();
+            } else {
+                return alert("Досвидания");
+            }
+        },
+
+        send_quest(){
+            let q_num = this.player.question_now;
+            if (q_num <=  this.questions.max_question){
+                console.log(`вопрос номер: ${q_num} \n ${this.questions[`question_${q_num}`]} \n Варианты ответа: \n
+                    a = ${this.questions[`answer_${q_num}`][1]} | b = ${this.questions[`answer_${q_num}`][2]} \n
+                    c = ${this.questions[`answer_${q_num}`][3]} | d = ${this.questions[`answer_${q_num}`][4]} `);
+            } else {
+                return false
+            }
+        },
+        get_direction(){
+            while (true) {
+                const direction = prompt("Введите ответ, для завершения игры нажмите отмену.");
+                if (direction === null) {return direction;}
+                if (!this.avaliableDirections.includes(direction)){
+                    alert(`Варианты ответов: ${this.avaliableDirections.join(", ")}.`);
+                    continue;
+                }
+                return direction;
+            }
+        },
+    };
+    game.run();
 </script>

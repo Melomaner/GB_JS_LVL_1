@@ -2,5 +2,113 @@
 
 <script>
     "use strict";
-    for (let i = 0; i < 10 ; console.log(i), ++i ){}
+    const settings = {
+        rows_count: 10,
+        cols_count: 10,
+        start_position_x:9,
+        start_position_y:9,
+    };
+
+    const player = {
+        x: null,
+        y: null,
+        init(start_x, start_y){
+                this.y = start_y;
+                this.x = start_x;
+        },
+
+        move(direction){
+      switch (direction) {
+          case 1:
+              this.y++;
+              this.x--;
+              break;
+          case 2:
+              this.y++;
+              break;
+          case 3:
+              this.y++;
+              this.x++;
+              break;
+          case 4:
+              this.x--;
+              break;
+          case 6:
+              this.x++;
+              break;
+          case 7:
+              this.y--;
+              this.x--;
+              break;
+          case 8:
+              this.y--;
+              break;
+          case 9:
+              this.y--;
+              this.x++;
+              break;
+      }
+    },
+    };
+
+    const game = {
+        settings,
+        player,
+        avaliableDirections: [-1, 1, 2, 3, 4, 6, 7, 8, 9],
+
+        validMove(){
+            if (player.y < 0){
+                player.y = 0;
+            } else if (player.y >= settings.rows_count){
+                player.y--;
+            }
+
+            if (player.x < 0){
+                player.x = 0;
+            } else if (player.x >= settings.cols_count) {
+                player.x--;
+            }
+        },
+
+        run() {
+            this.player.init(this.settings.start_position_x, this.settings.start_position_y);
+            while (true) {
+                this.validMove();
+                this.render();
+                const direction = this.get_direction();
+
+                if(direction === -1) {
+                    return alert("Досвидания");
+                }
+                console.clear();
+                this.player.move(direction);
+            }
+        },
+
+        render(){
+            let map = "";
+            for ( let row = 0; row < this.settings.rows_count; row++) {
+                for (let col = 0; col < this.settings.cols_count; col++){
+                    if (this.player.y === row && this.player.x === col){
+                        map += "o ";
+                    } else {
+                        map += "x ";
+                    }
+                }
+            map += "\n";
+            }
+            console.log(map);
+        },
+        get_direction(){
+          while (true) {
+              const direction = parseInt(prompt("Введите число, куда вы хотите переместится, -1 для выхода."));
+              if (!this.avaliableDirections.includes(direction)){
+                  alert(`Для перемещения необходимо ввести одно из чисел: ${this.avaliableDirections.join(", ")}.`);
+                  continue;
+              }
+              return direction;
+          }
+        },
+    };
+    game.run();
 </script>
