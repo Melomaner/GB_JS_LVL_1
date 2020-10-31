@@ -1,0 +1,78 @@
+<meta charset="UTF-8">
+
+<script>
+    "use strict";
+
+    let x = parseInt(prompt("Введите число x"));
+    let y = parseInt(prompt("Введите число y"));
+
+    if (!isNaN(x) && !isNaN(y)){
+        let operation = prompt("Что вы хотите сделать с числами?" +
+        " : sum = Сложить | diff = Вычесть | div = разделить | multi = Умножить");
+        alert ("Результат операции: " + mathOperation(x, y, operation));
+    } else {
+        alert("Введенные данные не являются числом");
+    }
+
+
+
+
+    /**
+     * Проводит выбранную пользователем операцию
+     * @param {number} arg1
+     * @param {number} arg2
+     * @param {string} operation
+     * @returns {*}
+     */
+    function mathOperation(arg1, arg2, operation){
+        switch (operation) {
+            case "sum":
+                return sum(arg1, arg2);
+            case "diff":
+                return diff(arg1, arg2);
+            case "div":
+                return div(arg1,arg2);
+            case "multi":
+                return multi(arg1, arg2);
+            default:
+                return "Введена не верная команда"
+        }
+    }
+    /**
+     * Расчитывает сумму чисел
+     * @param {number} a
+     * @param {number} b
+     * @returns {number}
+     */
+    function sum(a, b) {
+        return a + b;
+    }
+    /**
+     * Расчитывает разность чисел
+     * @param {number} a
+     * @param {number} b
+     * @returns {number}
+     */
+    function diff(a, b) {
+        return a - b;
+    }
+    /**
+     * Расчитывает часное чисел
+     * @param {number} a
+     * @param {number} b
+     * @returns {number}
+     */
+    function div(a, b) {
+        return a / b;
+    }
+    /**
+     * Расчитывает произведение чисел
+     * @param {number} a
+     * @param {number} b
+     * @returns {number}
+     */
+    function multi(a, b) {
+        return a * b;
+    }
+
+</script>

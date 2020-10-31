@@ -1,5 +1,55 @@
 <meta charset="UTF-8">
 
 <script>
-alert (1000 + "108")
+    "use strict";
+
+    /**
+     * Расчитывает сумму чисел
+     * @param {number} a
+     * @param {number} b
+     * @returns {number}
+     */
+    function sum(a, b) {
+        return a + b;
+    }
+    /**
+     * Расчитывает разность чисел
+     * @param {number} a
+     * @param {number} b
+     * @returns {number}
+     */
+    function diff(a, b) {
+        return a - b;
+    }
+    /**
+     * Расчитывает часное чисел
+     * @param {number} a
+     * @param {number} b
+     * @returns {number}
+     */
+    function div(a, b) {
+        return a / b;
+    }
+    /**
+     * Расчитывает произведение чисел
+     * @param {number} a
+     * @param {number} b
+     * @returns {number}
+     */
+    function multi(a, b) {
+        return a * b;
+    }
+
+
+
+    let x = parseInt(prompt("Введите число x"));
+    let y = parseInt(prompt("Введите число y"));
+    if (!isNaN(x) && !isNaN(y)){
+        alert(`Сумма введеных чисел = ${sum(x,y)}` );
+        alert(`Разность введеных чисел = ${diff(x,y)}` );
+        alert(`Часное введеных чисел = ${div(x,y)}` );
+        alert(`Произведение введеных чисел = ${multi(x,y)}` );
+    } else {
+        alert("Введенные данные не являются числом");
+    }
 </script>

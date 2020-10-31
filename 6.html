@@ -1,0 +1,40 @@
+<meta charset="UTF-8">
+
+<script>
+    let bank = 0;
+    do {
+        let add_money = parseInt(prompt('Какое колличество денег вы хотите положить в банк?'));
+        if (!isNaN(add_money)){
+            bank = sum(bank, add_money);
+            if ((add_money % 10 === 1) && (add_money % 100 !== 11)){
+                alert(`Ваша сумма в ${add_money} рубль успешно зачисленна.`);
+            } else if (((add_money % 10 ===  2) || (add_money % 10 === 3) || (add_money % 10 === 4) ) &&
+                (add_money % 100 !== 12) && (add_money % 100 !== 13) && (add_money % 100 !== 14 )) {
+                alert(`Ваша сумма в ${add_money} рубля успешно зачисленна.`);
+            } else {
+                alert(`Ваша сумма в ${add_money} рублей успешно зачисленна.`);
+            }
+            if ((bank % 10 === 1) && (bank % 100 !== 11)){
+                alert(`Текущая сумма в банке${bank} рубль`);
+            } else if (((bank % 10 ===  2) || (bank % 10 === 3) || (bank % 10 === 4) ) &&
+                (bank % 100 !== 12) && (bank % 100 !== 13) && (bank % 100 !== 14 )) {
+                alert(`Текущая сумма в банке ${bank} рубля.`);
+            } else {
+                alert(`Текущая сумма в банке ${bank} рублей.`);
+            }
+        } else {
+            alert("Введена не верная информация.");
+        }
+    } while (confirm ("Нужно еще положить денег в банк ?"));
+    alert("Спасибо за пользование нашего банка 'Кредит на века', досвидания.");
+
+    /**
+     * Расчитывает сумму чисел
+     * @param {number} a
+     * @param {number} b
+     * @returns {number}
+     */
+    function sum(a, b) {
+        return a + b;
+    }
+</script>
